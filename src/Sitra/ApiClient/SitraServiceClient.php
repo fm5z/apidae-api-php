@@ -64,7 +64,7 @@ use Symfony\Component\Finder\Finder;
 class SitraServiceClient extends GuzzleClient
 {
     protected $config = [
-        'baseUri'       => 'http://api.sitra-tourisme.com/',
+        'baseUri'       => 'http://api.apidae-tourisme.com/',
         'apiKey'        => null,
         'projectId'     => null,
 
@@ -87,7 +87,7 @@ class SitraServiceClient extends GuzzleClient
         'verify'            => true,
 
         // For SSO authentication
-        'ssoBaseUrl'        => 'http://base.sitra-tourisme.com',
+        'ssoBaseUrl'        => 'http://base.apidae-tourisme.com',
         'ssoRedirectUrl'    => 'http://localhost/',
         'ssoClientId'       => null,
         'ssoSecret'         => null,
