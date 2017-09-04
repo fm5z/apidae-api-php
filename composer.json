@@ -1,11 +1,15 @@
 {
-    "name": "sitra-tourisme/sitra-api-php",
+    "name": "fm5z/sitra-api-php",
     "description": "Apidae API official PHP Client (formerly known as Sitra)",
     "license": "MIT",
     "authors": [
         {
             "name": "JoliCode",
             "email": "coucou@jolicode.com"
+        },
+        {
+            "name": "Second Guide",
+            "email": "contact@secondguide.fr"
         }
     ],
     "require": {
