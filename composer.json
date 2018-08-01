@@ -14,7 +14,7 @@
     ],
     "require": {
         "guzzlehttp/guzzle-services": "0.5.*",
-        "mmoreram/extractor": "~1.1"
+        "fm5z/extractor": "~1.2"
     },
     "autoload": {
         "psr-4": {
