@@ -10,7 +10,7 @@
     ],
     "require": {
         "guzzlehttp/guzzle-services": "~1.1",
-        "fm5z/extractor": "~1.2-dev"
+        "fm5z/extractor": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0"
