@@ -1,4 +1,4 @@
-# Apidae PHP Api Client (formerly known as Sitra)
+# Apidae PHP Api Client
 
 PHP Client for Rhône Alpes Tourisme [Apidae API](http://blog.apidae-tourisme.com/)
 
@@ -16,13 +16,13 @@ to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
 
 ### Via Composer
 
-    composer require sitra-tourisme/sitra-api-php
+    composer require fm5z/apidae-api-php
     
 ### Standalone (when you can't use Composer)
 
 If you can't use Composer:
 
-- You can download a full archive [here](http://dev.apidae-tourisme.com/wp-content/uploads/2015/03/sitra-api-php-1-0.zip)
+- You can download a full archive [here](http://dev.apidae-tourisme.com/wp-content/uploads/2015/03/apidae-api-php-1-0.zip)
   - Extract the ZIP file and add the whole "vendor" directory to your project;
   - Include the file `vendor/autoload.php` if you do not have an autoloader already.
 
@@ -30,7 +30,7 @@ If you can't use Composer:
   - Go to https://composer.borreli.com/, paste this JSON and download the ZIP:
 ```json
 {
-    "require": { "sitra-tourisme/sitra-api-php": "@stable" }
+    "require": { "fm5z/apidae-api-php": "@stable" }
 }
 ```
   - Extract the ZIP file and add the whole "vendor" directory to your project;
@@ -44,13 +44,13 @@ However we **strongly** encourage you to [use Composer](https://getcomposer.org/
 You need to create a `Client` instance:
 
 ```php
-$client = new \Sitra\ApiClient\Client([
+$client = new \Apidae\ApiClient\Client([
     'apiKey'           => 'XXX',
     'projectId'        => 672,
-    'baseUrl'          => 'http://api.sitra-tourisme.com/',
+    'baseUrl'          => 'http://api.apidae-tourisme.com/',
     'OAuthClientId'    => 'XXX',
     'OAuthSecret'      => 'XXX',
-    'exportDir'        => '/tmp/sitraExports',
+    'exportDir'        => '/tmp/apidaeExports',
 
     // Http client configuration
     'timeout'          => 0,
@@ -64,14 +64,14 @@ $client = new \Sitra\ApiClient\Client([
     'count'            => 20,
 
     // For SSO
-    'ssoBaseUrl'       => 'http://base.sitra-tourisme.com',
+    'ssoBaseUrl'       => 'http://base.fm5z.com',
     'ssoRedirectUrl'   => 'http://localhost/',
     'ssoClientId'      => 'XXX',
     'ssoSecret'        => 'XXX',
 ]);
 
 // You can also only use the mandatory parameters (all options have sensible defaults).
-$client = new \Sitra\ApiClient\Client([
+$client = new \Apidae\ApiClient\Client([
     'apiKey'           => 'XXX',
     'projectId'        => 672,
 ]);
@@ -114,12 +114,12 @@ We recommend that all API calls are done in a try block.
 
 ##### API Errors
 
-Errors from the API are wrapped in `Sitra\ApiClient\Exception\SitraException`.
+Errors from the API are wrapped in `Apidae\ApiClient\Exception\ApidaeException`.
 
 ```php
 try {
     $cities = $client->getReferenceCity(['query' => '{"codesInsee": ["38534", "69388", "74140"]}']);
-} catch (\Sitra\ApiClient\Exception\SitraException $e) {
+} catch (\Apidae\ApiClient\Exception\ApidaeException $e) {
     echo $e->getMessage();
 }
 ```
@@ -134,7 +134,7 @@ They are represent by `GuzzleHttp\Command\Exception\CommandException`.
 
 ##### Metadata Errors
 
-The JSON used for metadata editing is complex and come with his own Exception `Sitra\ApiClient\Exception\InvalidMetadataFormatException`.
+The JSON used for metadata editing is complex and come with his own Exception `Apidae\ApiClient\Exception\InvalidMetadataFormatException`.
 
 ## API methods
 
@@ -372,9 +372,9 @@ array(
     "statut" => "SUCCESS",
     "reinitialisation" => "false",
     "projetId" => "672",
-    "urlConfirmation" => "http://api.sitra-tourisme.com/api/v002/export/confirmation?hash=XXX",
+    "urlConfirmation" => "http://api.apidae-tourisme.com/api/v002/export/confirmation?hash=XXX",
     "ponctuel" => "true",
-    "urlRecuperation" => "http://export.sitra-tourisme.com/exports/XXX.zip",
+    "urlRecuperation" => "http://export.fm5z.com/exports/XXX.zip",
 );
 ```
 
@@ -456,7 +456,7 @@ then forward your user to the Apidae authorization URL. The user can then give y
 to access his data and will be redirected on your application with a code. This code is used to get an Access Token.
 
 ```php
-$client = new \Sitra\ApiClient\Client([
+$client = new \Apidae\ApiClient\Client([
     'ssoRedirectUrl' => 'http://example.com/TODO',
     'ssoClientId'    => 'XXX',
     'ssoSecret'      => 'XXX',

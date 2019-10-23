@@ -1,13 +1,13 @@
-<?php namespace Sitra\Tests\Endpoints;
+<?php namespace Apidae\Tests\Endpoints;
 
 use GuzzleHttp\Command\Result;
 use GuzzleHttp\Psr7\Response;
-use Sitra\ApiClient\Description\Exports;
+use Apidae\ApiClient\Description\Exports;
 
 /**
  * Class ExportsTest
  *
- * @package Sitra\Tests\Endpoints
+ * @package Apidae\Tests\Endpoints
  * @author Stefan Kowalke <blueduck@mailbox.org>
  */
 class ExportsTest extends BaseEndpointTestCase
@@ -33,9 +33,9 @@ class ExportsTest extends BaseEndpointTestCase
             "statut" => "SUCCESS",
             "reinitialisation" => "false",
             "projetId" => "672",
-            "urlConfirmation" => "http://api.sitra-tourisme.com/api/v002/export/confirmation?hash=672_20150106-1344_V4BjvT",
+            "urlConfirmation" => "http://api.apidae-tourisme.com/api/v002/export/confirmation?hash=672_20150106-1344_V4BjvT",
             "ponctuel" => "true",
-            "urlRecuperation" => "http://export.sitra-tourisme.com/exports/672_20150106-1344_V4BjvT.zip",
+            "urlRecuperation" => "http://export.apidae-tourisme.com/exports/672_20150106-1344_V4BjvT.zip",
         );
 
         $client = $this->getTestClient([

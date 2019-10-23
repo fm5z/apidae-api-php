@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitra\ApiClient\Description;
+namespace Apidae\ApiClient\Description;
 
 class TouristicObjects
 {

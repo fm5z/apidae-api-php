@@ -4,10 +4,10 @@
 include __DIR__."/../vendor/autoload.php";
 
 // Create the client
-$client = new \Sitra\ApiClient\Client([
+$client = new \Apidae\ApiClient\Client([
     'apiKey'        => 'XXX',
     'projectId'     => 000,
-    'baseUrl'       => 'http://api.sitra-tourisme.com/',
+    'baseUrl'       => 'http://api.apidae-tourisme.com/',
 ]);
 
 try {
@@ -20,9 +20,9 @@ try {
         "statut" => "SUCCESS",
         "reinitialisation" => "false",
         "projetId" => "672",
-        "urlConfirmation" => "http://api.sitra-tourisme.com/api/v002/export/confirmation?hash=672_20150106-1344_V4BjvT",
+        "urlConfirmation" => "http://api.apidae-tourisme.com/api/v002/export/confirmation?hash=672_20150106-1344_V4BjvT",
         "ponctuel" => "true",
-        "urlRecuperation" => "http://export.sitra-tourisme.com/exports/672_20150106-1344_V4BjvT.zip",
+        "urlRecuperation" => "http://export.apidae-tourisme.com/exports/672_20150106-1344_V4BjvT.zip",
     );
 
     $exportFiles = $client->getExportFiles(['url' => $exportNotification['urlRecuperation']]);
@@ -55,7 +55,7 @@ try {
 
     $elements = $client->getReferenceSelection(['query' => [ "selectionIds" => [  64, 5896 ] ]]);
     var_dump(count($elements));
-} catch (\Sitra\ApiClient\Exception\SitraException $e) {
+} catch (\Apidae\ApiClient\Exception\ApidaeException $e) {
     echo $e->getMessage();
     echo "\n";
     echo $e->getPrevious()->getMessage();

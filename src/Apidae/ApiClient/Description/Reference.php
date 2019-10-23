@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitra\ApiClient\Description;
+namespace Apidae\ApiClient\Description;
 
 class Reference
 {
@@ -19,7 +19,7 @@ class Reference
                     'location'  => 'postField',
                     'required'  => true,
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
+                        '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
                     ],
                 ],
             ],
@@ -34,7 +34,7 @@ class Reference
                     'location'  => 'postField',
                     'required'  => true,
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
+                        '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
                     ],
                 ],
             ],
@@ -49,7 +49,7 @@ class Reference
                     'location'  => 'postField',
                     'required'  => true,
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
+                        '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
                     ],
                 ],
             ],
@@ -64,7 +64,7 @@ class Reference
                     'location'  => 'postField',
                     'required'  => true,
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
+                        '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
                     ],
                 ],
             ],

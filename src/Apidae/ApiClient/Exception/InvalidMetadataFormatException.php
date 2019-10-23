@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitra\ApiClient\Exception;
+namespace Apidae\ApiClient\Exception;
 
 class InvalidMetadataFormatException extends \InvalidArgumentException
 {

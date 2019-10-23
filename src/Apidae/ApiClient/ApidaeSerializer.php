@@ -1,5 +1,5 @@
 <?php
-namespace Sitra\ApiClient;
+namespace Apidae\ApiClient;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Command\CommandInterface;
@@ -17,13 +17,13 @@ use GuzzleHttp\Command\Guzzle\RequestLocation\XmlLocation;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
 use Psr\Http\Message\RequestInterface;
-use Sitra\ApiClient\Exception\MissingTokenException;
-use Sitra\ApiClient\Middleware\AuthenticationHandler;
+use Apidae\ApiClient\Exception\MissingTokenException;
+use Apidae\ApiClient\Middleware\AuthenticationHandler;
 
 /**
  * Serializes requests for a given command.
  */
-class SitraSerializer
+class ApidaeSerializer
 {
     /** @var RequestLocationInterface[] */
     private $locations;

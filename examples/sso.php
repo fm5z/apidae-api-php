@@ -4,7 +4,7 @@
 include __DIR__."/../vendor/autoload.php";
 
 // Create the client
-$client = new \Sitra\ApiClient\Client([
+$client = new \Apidae\ApiClient\Client([
     'ssoRedirectUrl' => 'http://example.com/TODO',
     'ssoClientId'    => 'XXX',
     'ssoSecret'      => 'XXX',
@@ -32,7 +32,7 @@ try {
         $permissions = $client->getUserPermissionOnObject(['id' => 123457]);
         var_dump($permissions);
     }
-} catch (\Sitra\ApiClient\Exception\SitraException $e) {
+} catch (\Apidae\ApiClient\Exception\ApidaeException $e) {
     echo $e->getMessage();
     echo "\n";
     echo $e->getPrevious()->getMessage();

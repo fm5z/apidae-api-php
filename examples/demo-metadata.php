@@ -4,10 +4,10 @@
 include __DIR__."/../vendor/autoload.php";
 
 // Create the client
-$client = new \Sitra\ApiClient\Client([
+$client = new \Apidae\ApiClient\Client([
     'apiKey'        => 'XXX',
     'projectId'     => 000,
-    'baseUrl'       => 'http://api.sitra-tourisme.com/',
+    'baseUrl'       => 'http://api.apidae-tourisme.com/',
     'OAuthClientId' => 'XXX',
     'OAuthSecret'   => 'XXX',
 ]);
@@ -67,7 +67,7 @@ try {
 
     $metadata = $client->getMetadata(['referenceId' => 123457, 'nodeId' => 'jolicode', 'targetType' => 'membre']);
     var_dump($metadata);
-} catch (\Sitra\ApiClient\Exception\SitraException $e) {
+} catch (\Apidae\ApiClient\Exception\ApidaeException $e) {
     echo $e->getMessage();
     echo "\n";
     echo $e->getPrevious()->getMessage();

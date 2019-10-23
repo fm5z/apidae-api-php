@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitra\Tests;
+namespace Apidae\Tests;
 
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Subscriber\History;

@@ -1,6 +1,6 @@
 {
-    "name": "Sitra API",
-    "baseUrl": "http://api.sitra-tourisme.com",
+    "name": "Apidae API",
+    "baseUrl": "http://api.apidae-tourisme.com",
     "operations": {
         "Testing": {
             "httpMethod": "POST",

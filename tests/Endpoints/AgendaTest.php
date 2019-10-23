@@ -1,13 +1,13 @@
-<?php namespace Sitra\Tests\Endpoints;
+<?php namespace Apidae\Tests\Endpoints;
 
 use GuzzleHttp\Command\Result;
 use GuzzleHttp\Psr7\Response;
-use Sitra\ApiClient\Description\Agenda;
+use Apidae\ApiClient\Description\Agenda;
 
 /**
  * Class AgendaTest
  *
- * @package Sitra\Tests\Endpoints
+ * @package Apidae\Tests\Endpoints
  * @author Stefan Kowalke <blueduck@mailbox.org>
  */
 class AgendaTest extends BaseEndpointTestCase

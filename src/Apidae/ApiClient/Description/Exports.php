@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitra\ApiClient\Description;
+namespace Apidae\ApiClient\Description;
 
 class Exports
 {
@@ -16,7 +16,7 @@ class Exports
                     'location' => 'query',
                     'required' => true,
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Exports::validateHash',
+                        '\Apidae\ApiClient\Description\Exports::validateHash',
                     ],
                 ],
             ],

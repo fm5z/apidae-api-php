@@ -1,11 +1,11 @@
 <?php
 
-namespace Sitra\Tests;
+namespace Apidae\Tests;
 
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Subscriber\History;
 use GuzzleHttp\Subscriber\Mock;
-use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
+use Apidae\ApiClient\Subscriber\AuthenticationSubscriber;
 
 class MetadataTest extends Base
 {
@@ -113,7 +113,7 @@ class MetadataTest extends Base
     }
 
     /**
-     * @expectedException \Sitra\ApiClient\Exception\InvalidMetadataFormatException
+     * @expectedException \Apidae\ApiClient\Exception\InvalidMetadataFormatException
      * @dataProvider wrongJson
      */
     public function testWrongData($data)

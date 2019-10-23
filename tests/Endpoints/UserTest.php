@@ -1,15 +1,15 @@
-<?php namespace Sitra\Tests\Endpoints;
+<?php namespace Apidae\Tests\Endpoints;
 
 use GuzzleHttp\Command\Result;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use Sitra\ApiClient\Description\User;
-use Sitra\ApiClient\Middleware\AuthenticationHandler;
+use Apidae\ApiClient\Description\User;
+use Apidae\ApiClient\Middleware\AuthenticationHandler;
 
 /**
  * Class UserTest
  *
- * @package Sitra\Tests\Endpoints
+ * @package Apidae\Tests\Endpoints
  * @author Stefan Kowalke <blueduck@mailbox.org>
  */
 class UserTest extends BaseEndpointTestCase

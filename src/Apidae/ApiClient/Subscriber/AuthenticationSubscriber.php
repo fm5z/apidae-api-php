@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitra\ApiClient\Subscriber;
+namespace Apidae\ApiClient\Subscriber;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Command\Event\InitEvent;
@@ -8,7 +8,7 @@ use GuzzleHttp\Command\Event\PreparedEvent;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 use GuzzleHttp\Event\SubscriberInterface;
 use GuzzleHttp\Utils;
-use Sitra\ApiClient\Exception\MissingTokenException;
+use Apidae\ApiClient\Exception\MissingTokenException;
 
 class AuthenticationSubscriber implements SubscriberInterface
 {

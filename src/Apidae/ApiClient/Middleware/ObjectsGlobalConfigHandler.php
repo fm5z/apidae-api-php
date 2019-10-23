@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitra\ApiClient\Middleware;
+namespace Apidae\ApiClient\Middleware;
 
 use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;
@@ -8,7 +8,7 @@ use GuzzleHttp\Command\Guzzle\DescriptionInterface;
 /**
  * Class ObjectsGlobalConfigHandler
  *
- * @package Sitra\ApiClient\Middleware
+ * @package Apidae\ApiClient\Middleware
  * @author Stefan Kowalke <blueduck@mailbox.org>
  */
 class ObjectsGlobalConfigHandler

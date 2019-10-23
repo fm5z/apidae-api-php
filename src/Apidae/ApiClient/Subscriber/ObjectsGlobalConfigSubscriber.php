@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitra\ApiClient\Subscriber;
+namespace Apidae\ApiClient\Subscriber;
 
 use GuzzleHttp\Command\Event\InitEvent;
 use GuzzleHttp\Command\Guzzle\DescriptionInterface;

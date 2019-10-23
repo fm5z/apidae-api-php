@@ -1,6 +1,6 @@
 {
-    "name": "fm5z/sitra-api-php",
-    "description": "Apidae API official PHP Client (formerly known as Sitra)",
+    "name": "fm5z/apidae-api-php",
+    "description": "Apidae API official PHP Client",
     "license": "MIT",
     "authors": [
         {
@@ -18,8 +18,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Sitra\\ApiClient\\": "src/Sitra/ApiClient",
-            "Sitra\\Tests\\": "tests/"
+            "Apidae\\ApiClient\\": "src/Apidae/ApiClient",
+            "Apidae\\Tests\\": "tests/"
         }
     }
 }

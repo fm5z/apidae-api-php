@@ -1,26 +1,26 @@
 <?php
 
-namespace Sitra\Tests\Endpoints;
+namespace Apidae\Tests\Endpoints;
 
 use Exception;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Middleware;
-use Sitra\ApiClient\SitraServiceClient;
-use Sitra\Tests\Base;
+use Apidae\ApiClient\ApidaeServiceClient;
+use Apidae\Tests\Base;
 
 /**
  * Class BaseEndpointTestCase
  *
- * @package Sitra\Tests\Endpoints
+ * @package Apidae\Tests\Endpoints
  * @author Stefan Kowalke <blueduck@mailbox.org>
  */
 class BaseEndpointTestCase extends Base
 {
     /** @var array $config */
     protected $config = [
-        'base_uri'       => 'http://api.sitra-tourisme.com/',
+        'base_uri'       => 'http://api.apidae-tourisme.com/',
     ];
 
 
@@ -89,7 +89,7 @@ class BaseEndpointTestCase extends Base
 
     /**
      * @param array $responses
-     * @return SitraServiceClient
+     * @return ApidaeServiceClient
      */
     protected function getTestClient(array $responses = [])
     {
@@ -102,7 +102,7 @@ class BaseEndpointTestCase extends Base
             'handler' => $handlerStack,
         ];
 
-        return new SitraServiceClient($this->config, $this->description);
+        return new ApidaeServiceClient($this->config, $this->description);
     }
 
 }

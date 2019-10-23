@@ -1,8 +1,8 @@
 <?php
 
-namespace Sitra\ApiClient\Description;
+namespace Apidae\ApiClient\Description;
 
-use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
+use Apidae\ApiClient\Subscriber\AuthenticationSubscriber;
 
 class User
 {

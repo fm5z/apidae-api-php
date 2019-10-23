@@ -4,10 +4,10 @@
 include __DIR__."/../vendor/autoload.php";
 
 // Create the client
-$client = new \Sitra\ApiClient\Client([
+$client = new \Apidae\ApiClient\Client([
     'apiKey'        => 'XXX',
     'projectId'     => 000,
-    'baseUrl'       => 'http://api.sitra-tourisme.com/',
+    'baseUrl'       => 'http://api.apidae-tourisme.com/',
 ]);
 
 try {
@@ -52,7 +52,7 @@ try {
 
     $object = $client->getObjectByIdentifier(['identifier' => 'sitraSKI275809']);
     var_dump($object['id']);
-} catch (\Sitra\ApiClient\Exception\SitraException $e) {
+} catch (\Apidae\ApiClient\Exception\ApidaeException $e) {
     echo $e->getMessage();
     echo "\n";
     echo $e->getPrevious()->getMessage();

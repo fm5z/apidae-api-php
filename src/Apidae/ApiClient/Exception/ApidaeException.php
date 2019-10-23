@@ -1,12 +1,12 @@
 <?php
 
-namespace Sitra\ApiClient\Exception;
+namespace Apidae\ApiClient\Exception;
 
 use Exception;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Utils;
 
-class SitraException extends \Exception
+class ApidaeException extends \Exception
 {
     protected $request;
     protected $response;

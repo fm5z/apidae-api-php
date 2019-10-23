@@ -1,10 +1,10 @@
 <?php
 
-namespace Sitra\ApiClient\Description;
+namespace Apidae\ApiClient\Description;
 
 use GuzzleHttp\Query;
-use Sitra\ApiClient\Exception\InvalidMetadataFormatException;
-use Sitra\ApiClient\Subscriber\AuthenticationSubscriber;
+use Apidae\ApiClient\Exception\InvalidMetadataFormatException;
+use Apidae\ApiClient\Subscriber\AuthenticationSubscriber;
 
 class Metadata
 {
@@ -91,7 +91,7 @@ class Metadata
                     'required' => true,
                     'location' => 'body',
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Metadata::validateMetadata',
+                        '\Apidae\ApiClient\Description\Metadata::validateMetadata',
                     ],
                 ],
             ],

@@ -1,11 +1,11 @@
 <?php
 
-namespace Sitra\Tests;
+namespace Apidae\Tests;
 
 use GuzzleHttp\Message\Response;
 use GuzzleHttp\Subscriber\History;
 use GuzzleHttp\Subscriber\Mock;
-use Sitra\ApiClient\Client;
+use Apidae\ApiClient\Client;
 
 abstract class Base extends \PHPUnit_Framework_TestCase
 {
@@ -20,7 +20,7 @@ abstract class Base extends \PHPUnit_Framework_TestCase
     ];
 
     /**
-     * @var \Sitra\ApiClient\Client
+     * @var \Apidae\ApiClient\Client
      */
     protected $client;
 

@@ -1,15 +1,15 @@
-<?php namespace Sitra\Tests\Endpoints;
+<?php namespace Apidae\Tests\Endpoints;
 
 use GuzzleHttp\Command\Result;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Response;
-use Sitra\ApiClient\Description\Metadata;
-use Sitra\ApiClient\Middleware\AuthenticationHandler;
+use Apidae\ApiClient\Description\Metadata;
+use Apidae\ApiClient\Middleware\AuthenticationHandler;
 
 /**
  * Class MetadataTest
  *
- * @package Sitra\Tests\Endpoints
+ * @package Apidae\Tests\Endpoints
  * @author Stefan Kowalke <blueduck@mailbox.org>
  */
 class MetadataTest extends BaseEndpointTestCase
@@ -152,7 +152,7 @@ class MetadataTest extends BaseEndpointTestCase
 
 
     /**
-     * @expectedException \Sitra\ApiClient\Exception\InvalidMetadataFormatException
+     * @expectedException \Apidae\ApiClient\Exception\InvalidMetadataFormatException
      * @dataProvider wrongJson
      * @param $data
      */

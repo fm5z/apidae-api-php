@@ -1,6 +1,6 @@
 <?php
 
-namespace Sitra\ApiClient\Description;
+namespace Apidae\ApiClient\Description;
 
 class Agenda
 {
@@ -17,7 +17,7 @@ class Agenda
                     'location'  => 'postField',
                     'required'  => true,
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
+                        '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
                     ],
                 ],
             ],
@@ -32,7 +32,7 @@ class Agenda
                     'location'  => 'postField',
                     'required'  => true,
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
+                        '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
                     ],
                 ],
             ],
@@ -47,7 +47,7 @@ class Agenda
                     'location'  => 'postField',
                     'required'  => true,
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
+                        '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
                     ],
                 ],
             ],
@@ -62,7 +62,7 @@ class Agenda
                     'location'  => 'postField',
                     'required'  => true,
                     'filters' => [
-                        '\Sitra\ApiClient\Description\Search::encodeSearchQuery',
+                        '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
                     ],
                 ],
             ],

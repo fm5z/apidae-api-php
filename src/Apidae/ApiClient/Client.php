@@ -1,34 +1,29 @@
 <?php
 
-namespace Sitra\ApiClient;
+namespace Apidae\ApiClient;
 
 use GuzzleHttp\Client as BaseClient;
-use GuzzleHttp\Command\CommandInterface;
 use GuzzleHttp\Command\Exception\CommandClientException;
 use GuzzleHttp\Command\Exception\CommandException;
 use GuzzleHttp\Command\Exception\CommandServerException;
 use GuzzleHttp\Command\Guzzle\Description;
 use GuzzleHttp\Command\Guzzle\GuzzleClient;
-use GuzzleHttp\Command\ResultInterface;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\Url;
 use Mmoreram\Extractor\Extractor;
 use Mmoreram\Extractor\Filesystem\SpecificDirectory;
-use Sitra\ApiClient\Description\Agenda;
-use Sitra\ApiClient\Description\Exports;
-use Sitra\ApiClient\Description\Metadata;
-use Sitra\ApiClient\Description\Reference;
-use Sitra\ApiClient\Description\Search;
-use Sitra\ApiClient\Description\Sso;
-use Sitra\ApiClient\Description\TouristicObjects;
-use Sitra\ApiClient\Description\User;
-use Sitra\ApiClient\Exception\InvalidExportDirectoryException;
-use Sitra\ApiClient\Exception\InvalidMetadataFormatException;
-use Sitra\ApiClient\Exception\SitraException;
-use Sitra\ApiClient\Middleware\AuthenticationHandler;
-use Sitra\ApiClient\Middleware\ObjectsGlobalConfigHandler;
-use Symfony\Component\Finder\Finder;
+use Apidae\ApiClient\Description\Agenda;
+use Apidae\ApiClient\Description\Exports;
+use Apidae\ApiClient\Description\Metadata;
+use Apidae\ApiClient\Description\Reference;
+use Apidae\ApiClient\Description\Search;
+use Apidae\ApiClient\Description\Sso;
+use Apidae\ApiClient\Description\TouristicObjects;
+use Apidae\ApiClient\Description\User;
+use Apidae\ApiClient\Exception\InvalidExportDirectoryException;
+use Apidae\ApiClient\Exception\ApidaeException;
+use Apidae\ApiClient\Subscriber\AuthenticationSubscriber;
+use Apidae\ApiClient\Subscriber\ObjectsGlobalConfigSubscriber;
 
 /**
  * Magic operations:
@@ -61,10 +56,10 @@ use Symfony\Component\Finder\Finder;
  * @method array getUserProfile() getUserProfile()
  * @method array getUserPermissionOnObject() getUserPermissionOnObject(array $params)
  */
-class SitraServiceClient extends GuzzleClient
+class Client extends GuzzleClient
 {
     protected $config = [
-        'baseUri'       => 'http://api.sitra-tourisme.com/',
+        'baseUrl'       => 'http://api.apidae-tourisme.com/',
         'apiKey'        => null,
         'projectId'     => null,
 
@@ -73,7 +68,7 @@ class SitraServiceClient extends GuzzleClient
         'OAuthSecret'   => null,
 
         // Export
-        'exportDir'     => '/tmp/sitraExports/',
+        'exportDir'     => '/tmp/apidaeExports/',
 
         // For object lists
         'responseFields' => [],
@@ -87,7 +82,7 @@ class SitraServiceClient extends GuzzleClient
         'verify'            => true,
 
         // For SSO authentication
-        'ssoBaseUrl'        => 'http://base.sitra-tourisme.com',
+        'ssoBaseUrl'        => 'http://apidae.apidae-tourisme.com',
         'ssoRedirectUrl'    => 'http://localhost/',
         'ssoClientId'       => null,
         'ssoSecret'         => null,
@@ -98,61 +93,58 @@ class SitraServiceClient extends GuzzleClient
 
     /**
      * @param array $config
-     * @param Description $description
      */
-    public function __construct(array $config = [], Description $description = null)
+    public function __construct(array $config = [])
     {
-        if ($description === null) {
-            $operations = array_merge(
-                TouristicObjects::$operations,
-                Metadata::$operations,
-                Exports::$operations,
-                Search::$operations,
-                Agenda::$operations,
-                Reference::$operations,
-                Sso::$operations,
-                User::$operations
-            );
-
-            $descriptionData = [
-                'baseUri' => $this->config['baseUri'],
-                'operations' => $operations,
-                'models' => [
-                    'getResponse' => [
-                        'type' => 'object',
-                        'additionalProperties' => [
-                            'location' => 'json',
-                        ],
-                    ],
-                ],
-            ];
-
-            $description = new Description($descriptionData);
-        }
-
         $this->config = new \ArrayObject(array_merge($this->config, $config));
 
-        if (isset($this->config['handler']) === false) {
-            $this->config['handler'] = HandlerStack::create();
-
-        }
-
-        $config = array_filter([
-            'base_uri' => $this->config['baseUri'],
-            'timeout'           => $this->config['timeout'],
-            'connect_timeout'   => $this->config['connectTimeout'],
-            'proxy'             => $this->config['proxy'],
-            'verify'            => $this->config['verify'],
-            'handler'           => $this->config['handler'],
+        $client = new BaseClient([
+            'base_url' => $this->config['baseUrl'],
+            'defaults' => array_filter([
+                'timeout'           => $this->config['timeout'],
+                'connect_timeout'   => $this->config['connectTimeout'],
+                'proxy'             => $this->config['proxy'],
+            ]),
+            'defaults' => [
+                'verify'            => $this->config['verify']
+            ]
         ]);
 
-        $client = new BaseClient($config);
+        $operations = array_merge(
+            TouristicObjects::$operations,
+            Metadata::$operations,
+            Exports::$operations,
+            Search::$operations,
+            Agenda::$operations,
+            Reference::$operations,
+            Sso::$operations,
+            User::$operations
+        );
 
-        parent::__construct($client, $description, new SitraSerializer($description, [], $client,  (array) $this->config));
+        $descriptionData = [
+            'baseUrl' => $this->config['baseUrl'],
+            'operations' => $operations,
+            'models' => [
+                'getResponse' => [
+                    'type' => 'object',
+                    'additionalProperties' => [
+                        'location' => 'json',
+                    ],
+                ],
+            ],
+        ];
 
-        $stack = $this->getHandlerStack();
-        $stack->before('validate_description', new ObjectsGlobalConfigHandler($description, (array) $this->config), 'objects_global_config');
-        $stack->before('validate_description', new AuthenticationHandler($description, (array) $this->config), 'authentication');
+        $description = new Description($descriptionData);
+
+        parent::__construct($client, $description, []);
+
+        $this->getEmitter()->attach(
+            new AuthenticationSubscriber($description, $this->config, $this->getHttpClient())
+        );
+
+        $this->getEmitter()->attach(
+            new ObjectsGlobalConfigSubscriber($description, $this->config)
+        );
     }
 
     /**
@@ -161,7 +153,7 @@ class SitraServiceClient extends GuzzleClient
      * @param  array                            $params
      * @return \Symfony\Component\Finder\Finder
      */
-    public function getExportFiles(array $params) : Finder
+    public function getExportFiles(array $params)
     {
         $client = $this->getHttpClient();
 
@@ -181,14 +173,16 @@ class SitraServiceClient extends GuzzleClient
         mkdir($exportPath);
         mkdir($exportFullPath);
 
-        $resource = fopen($zipFullPath, 'w');
-
         // Download the ZIP file in temp directory
         try {
-            $client->get($params['url'], ['sink' => $resource]);
+            $response = $client->get($params['url'], ['stream' => true]);
         } catch (\Exception $e) {
             $this->handleHttpError($e);
+            return false;
         }
+
+        // Could use save_to too
+        file_put_contents($zipFullPath, $response->getBody());
 
         // Extract the ZIP file
         $extractor = new Extractor(
@@ -200,10 +194,8 @@ class SitraServiceClient extends GuzzleClient
 
     /**
      * Remove all ZIP and exported files from the exportDir (cleanup files we have created)
-     *
-     * @return bool
      */
-    public function cleanExportFiles() : bool
+    public function cleanExportFiles()
     {
         $exportDirectory = $this->getExportDirectory();
 
@@ -228,69 +220,46 @@ class SitraServiceClient extends GuzzleClient
         return true;
     }
 
-    /**
-     * @return string
-     */
-    public function getSsoUrl() : string
+    public function getSsoUrl()
     {
         $params = array(
             'response_type' => 'code',
             'client_id'     => $this->config['ssoClientId'],
             'redirect_uri'  => $this->config['ssoRedirectUrl'],
-            'scope'         => AuthenticationHandler::SSO_SCOPE,
+            'scope'         => AuthenticationSubscriber::SSO_SCOPE,
         );
 
-        $query = \GuzzleHttp\Psr7\build_query($params);
+        $url = Url::fromString($this->config['ssoBaseUrl']);
+        $url->setPath('/oauth/authorize');
+        $url->setQuery($params);
 
-        $uri = new Uri($this->config['ssoBaseUrl']);
-        $uri = $uri->withPath('/oauth/authorize');
-        $uri = $uri->withQuery($query);
-
-        return (string) $uri;
+        return (string) $url;
     }
 
-    /**
-     * @param $scope
-     * @param $token
-     */
     public function setAccessToken($scope, $token)
     {
         $this->config['accessTokens'][$scope] = $token;
     }
 
-    /**
-     * Execute a single command.
-     *
-     * @param CommandInterface $command Command to execute
-     *
-     * @return ResultInterface The result of the executed command
-     * @throws CommandException
-     */
-    public function execute(CommandInterface $command) : ResultInterface
+    public function __call($name, array $arguments)
     {
         try {
-            return $this->executeAsync($command)->wait();
+            return parent::__call($name, $arguments);
         } catch (\Exception $e) {
             $this->handleHttpError($e);
         }
+
+        return false;
     }
 
-    /**
-     * @param \Exception $e
-     * @throws SitraException
-     * @throws \Exception
-     */
     private function handleHttpError(\Exception $e)
     {
-        if ($e->getPrevious() instanceof InvalidMetadataFormatException) {
-            throw $e->getPrevious();
-        }
         if ($e instanceof CommandClientException) {
-            throw new SitraException($e);
+            throw new ApidaeException($e);
         }
 
         if ($e instanceof CommandServerException) {
-            throw new SitraException($e);
+            throw new ApidaeException($e);
         }
 
         if ($e instanceof CommandException) {
@@ -298,16 +267,13 @@ class SitraServiceClient extends GuzzleClient
         }
 
         if ($e instanceof RequestException) {
-            throw new SitraException($e);
+            throw new ApidaeException($e);
         }
 
         throw $e;
     }
-    
-    /**
-     * @return SpecificDirectory
-     */
-    private function getExportDirectory() : SpecificDirectory
+
+    private function getExportDirectory()
     {
         if (!file_exists($this->config['exportDir'])) {
             mkdir($this->config['exportDir']);
