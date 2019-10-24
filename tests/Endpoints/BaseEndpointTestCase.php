@@ -20,7 +20,7 @@ class BaseEndpointTestCase extends Base
 {
     /** @var array $config */
     protected $config = [
-        'base_uri'       => 'http://api.apidae-tourisme.com/',
+        'base_uri'       => 'https://api.apidae-tourisme.com/',
     ];
 
 

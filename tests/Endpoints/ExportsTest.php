@@ -33,7 +33,7 @@ class ExportsTest extends BaseEndpointTestCase
             "statut" => "SUCCESS",
             "reinitialisation" => "false",
             "projetId" => "672",
-            "urlConfirmation" => "http://api.apidae-tourisme.com/api/v002/export/confirmation?hash=672_20150106-1344_V4BjvT",
+            "urlConfirmation" => "https://api.apidae-tourisme.com/api/v002/export/confirmation?hash=672_20150106-1344_V4BjvT",
             "ponctuel" => "true",
             "urlRecuperation" => "http://export.apidae-tourisme.com/exports/672_20150106-1344_V4BjvT.zip",
         );

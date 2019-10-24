@@ -6,20 +6,21 @@
         {
             "name": "JoliCode",
             "email": "coucou@jolicode.com"
-        },
-        {
-            "name": "Second Guide",
-            "email": "contact@secondguide.fr"
         }
     ],
     "require": {
-        "guzzlehttp/guzzle-services": "0.5.*",
-        "mmoreram/extractor": "~1.2"
+        "guzzlehttp/guzzle-services": "^1.1",
+        "mmoreram/extractor": "^1.2.1"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~7.0"
     },
     "autoload": {
         "psr-4": {
             "Apidae\\ApiClient\\": "src/Apidae/ApiClient",
             "Apidae\\Tests\\": "tests/"
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

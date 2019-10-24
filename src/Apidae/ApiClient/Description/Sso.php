@@ -1,11 +1,11 @@
 <?php
 
-namespace Apidae\ApiClient\Description;
+namespace Sitra\ApiClient\Description;
 
 class Sso
 {
     public static $operations = array(
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/authentification-client-credentials
+        // @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/authentification-client-credentials
         'getSsoToken' => [
             'httpMethod' => 'GET',
             'uri' => '/oauth/token',

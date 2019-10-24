@@ -1,11 +1,11 @@
 <?php
 
-namespace Apidae\ApiClient\Description;
 
+namespace Apidae\ApiClient\Description;
 class Exports
 {
     public static $operations = array(
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation
+        // @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports/notificationi-traitement-confirmation
         'confirmExport' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/export/confirmation',
@@ -22,7 +22,6 @@ class Exports
             ],
         ],
     );
-
     /**
      * Extract the hash from the Url if url is given as hash:
      *      /api/v002/export/confirmation?hash=HASH

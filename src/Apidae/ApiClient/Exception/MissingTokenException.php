@@ -1,7 +1,5 @@
 <?php
-
 namespace Apidae\ApiClient\Exception;
-
 class MissingTokenException extends \InvalidArgumentException
 {
     protected $message = <<<MESSAGE

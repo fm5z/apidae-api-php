@@ -1,4 +1,5 @@
 <?php
+
 namespace Apidae\ApiClient;
 
 use GuzzleHttp\Client;
@@ -44,20 +45,20 @@ class ApidaeSerializer
      * @param array $config
      */
     public function __construct(
-        DescriptionInterface $description,
-        array $requestLocations = [], Client $client,
-        array $config = []
+      DescriptionInterface $description,
+      array $requestLocations = [], Client $client,
+      array $config = []
     ) {
         static $defaultRequestLocations;
         if (!$defaultRequestLocations) {
             $defaultRequestLocations = [
-                'body'      => new BodyLocation(),
-                'query'     => new QueryLocation(),
-                'header'    => new HeaderLocation(),
-                'json'      => new JsonLocation(),
-                'xml'       => new XmlLocation(),
-                'formParam' => new FormParamLocation(),
-                'multipart' => new MultiPartLocation(),
+              'body'      => new BodyLocation(),
+              'query'     => new QueryLocation(),
+              'header'    => new HeaderLocation(),
+              'json'      => new JsonLocation(),
+              'xml'       => new XmlLocation(),
+              'formParam' => new FormParamLocation(),
+              'multipart' => new MultiPartLocation(),
             ];
         }
 
@@ -125,12 +126,12 @@ class ApidaeSerializer
 
         // For Sso methods, client ID and secret are passed as basic auth
         if (in_array($operation->getName(), [
-            'getSsoToken',
-            'refreshSsoToken',
+          'getSsoToken',
+          'refreshSsoToken',
         ])) {
             $request = $request->withHeader(
-                'Authorization',
-                'Basic ' . base64_encode(sprintf("%s:%s", $this->config['ssoClientId'], $this->config['ssoSecret']))
+              'Authorization',
+              'Basic ' . base64_encode(sprintf("%s:%s", $this->config['ssoClientId'], $this->config['ssoSecret']))
             );
 
             $request = $request->withHeader('Accept', 'application/json');
@@ -154,8 +155,8 @@ class ApidaeSerializer
         // If command does not specify a template, assume the client's base URL.
         if (null === $operation->getUri()) {
             return new Request(
-                $operation->getHttpMethod(),
-                $this->description->getBaseUri()
+              $operation->getHttpMethod(),
+              $this->description->getBaseUri()
             );
         }
 
@@ -190,8 +191,8 @@ class ApidaeSerializer
         $uri = \GuzzleHttp\uri_template($operation->getUri(), $variables);
 
         return new Request(
-            $operation->getHttpMethod(),
-            Uri::resolve($this->description->getBaseUri(), $uri)
+          $operation->getHttpMethod(),
+          Uri::resolve($this->description->getBaseUri(), $uri)
         );
     }
 
@@ -207,16 +208,16 @@ class ApidaeSerializer
 
         if ($scope === AuthenticationHandler::META_SCOPE) {
             $tokenResponse = $this->client->get('/oauth/token', [
-                'auth' => [
-                    $this->config['OAuthClientId'],
-                    $this->config['OAuthSecret'],
-                ],
-                'query' => [
-                    'grant_type' => 'client_credentials',
-                ],
-                'headers' => [
-                    'accept' => 'application/json',
-                ],
+              'auth' => [
+                $this->config['OAuthClientId'],
+                $this->config['OAuthSecret'],
+              ],
+              'query' => [
+                'grant_type' => 'client_credentials',
+              ],
+              'headers' => [
+                'accept' => 'application/json',
+              ],
             ])->json();
 
             $this->config['accessTokens'][$tokenResponse['scope']] = $tokenResponse['access_token'];

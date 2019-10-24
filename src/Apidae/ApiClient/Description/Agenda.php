@@ -5,8 +5,8 @@ namespace Apidae\ApiClient\Description;
 class Agenda
 {
     public static $operations = array(
-		// @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/formats-de-reponse
+		// @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches
+        // @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/formats-de-reponse
         'searchAgenda' => [
             'httpMethod' => 'POST',
             'uri' => '/api/v002/agenda/simple/list-objets-touristiques',
@@ -14,7 +14,7 @@ class Agenda
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
@@ -29,7 +29,7 @@ class Agenda
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
@@ -44,7 +44,7 @@ class Agenda
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
@@ -59,7 +59,7 @@ class Agenda
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Apidae\ApiClient\Description\Search::encodeSearchQuery',

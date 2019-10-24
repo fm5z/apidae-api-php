@@ -5,7 +5,7 @@ namespace Apidae\ApiClient\Description;
 class Search
 {
     public static $operations = array(
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches
+        // @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches
         'searchObject' => [
             'httpMethod' => 'POST',
             'uri' => '/api/v002/recherche/list-objets-touristiques',
@@ -13,7 +13,7 @@ class Search
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Apidae\ApiClient\Description\Search::encodeSearchQuery',
@@ -28,7 +28,7 @@ class Search
             'parameters' => [
                 'query' => [
                     'type'      => 'string',
-                    'location'  => 'postField',
+                    'location'  => 'formParam',
                     'required'  => true,
                     'filters' => [
                         '\Apidae\ApiClient\Description\Search::encodeSearchQuery',

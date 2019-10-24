@@ -7,10 +7,10 @@ PHP Client for Rhône Alpes Tourisme [Apidae API](http://blog.apidae-tourisme.co
 - Apidae SSO helpers;
 - Error handling;
 - Handle exports (Zip download and reading);
-- Based on Guzzle 5.
+- Based on Guzzle 6.
 
 This documentation only handle the PHP implementation, for further questions please refer 
-to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
+to [Apidae API Documentation](https://dev.apidae-tourisme.com/).
 
 ## Install
 
@@ -20,20 +20,11 @@ to [Apidae API Documentation](http://dev.apidae-tourisme.com/).
     
 ### Standalone (when you can't use Composer)
 
-If you can't use Composer:
 
-- You can download a full archive [here](http://dev.apidae-tourisme.com/wp-content/uploads/2015/03/apidae-api-php-1-0.zip)
-  - Extract the ZIP file and add the whole "vendor" directory to your project;
-  - Include the file `vendor/autoload.php` if you do not have an autoloader already.
+If you can't use Composer, you can download a full archive [here](https://dev.apidae-tourisme.com/wp-content/uploads/2019/02/sitra-api-php-1-0-5.zip)
 
-- Or, if you already use an autoloader, please follow those steps:
-  - Go to https://composer.borreli.com/, paste this JSON and download the ZIP:
-```json
-{
-    "require": { "fm5z/apidae-api-php": "@stable" }
-}
-```
-  - Extract the ZIP file and add the whole "vendor" directory to your project;
+- Extract the ZIP file and add the whole "vendor" directory to your project;
+- Include the file `vendor/autoload.php` if you do not have an autoloader already.
 
 However we **strongly** encourage you to [use Composer](https://getcomposer.org/) on all your projects.
 
@@ -47,7 +38,7 @@ You need to create a `Client` instance:
 $client = new \Apidae\ApiClient\Client([
     'apiKey'           => 'XXX',
     'projectId'        => 672,
-    'baseUrl'          => 'http://api.apidae-tourisme.com/',
+    'baseUrl'          => 'https://api.apidae-tourisme.com/',
     'OAuthClientId'    => 'XXX',
     'OAuthSecret'      => 'XXX',
     'exportDir'        => '/tmp/apidaeExports',
@@ -100,10 +91,10 @@ Result is always a decoded PHP Array.
 - `connectTimeout`: Float describing the number of seconds to wait while trying to connect to the server;
 - `proxy`: [String or array to specify](http://guzzle.readthedocs.org/en/latest/clients.html#proxy) an HTTP proxy (like `http://username:password@192.168.16.1:42`);
 - `verify`: [Boolean or string to describe](http://guzzle.readthedocs.org/en/latest/request-options.html#verify) the SSL certificate verification behavior of a request;
-- `responseFields`: Allow to filter the fields returned globally for all object related queries ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-donnees));
-- `locales`: Allow to filter the locales returned globally for all object related queries ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-langues));
+- `responseFields`: Allow to filter the fields returned globally for all object related queries ([documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-donnees));
+- `locales`: Allow to filter the locales returned globally for all object related queries ([documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/filtrage-des-langues));
 - `count`: Allow to change the number of results globally for all object related queries;
-- `ssoBaseUrl`: Base URL for SSO authentication ([documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on));
+- `ssoBaseUrl`: Base URL for SSO authentication ([documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/single-sign-on));
 - `ssoRedirectUrl`: The URL where SSO user will be sent back in your application;
 - `ssoClientId`: The SSO OAuth client ID;
 - `ssoSecret`: The SSO OAuth client secret.
@@ -142,7 +133,7 @@ The JSON used for metadata editing is complex and come with his own Exception `A
 
 #### Get by Id
 
-[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002objet-touristiqueget-by-id)
+[Full documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002objet-touristiqueget-by-id)
 
 ```php
 $object = $client->getObjectById(['id' => 163512]);
@@ -150,7 +141,7 @@ $object = $client->getObjectById(['id' => 163512]);
 
 #### Get by Identifier
 
-[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002objet-touristiqueget-by-identifier)
+[Full documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services/v002objet-touristiqueget-by-identifier)
 
 ```php
 $object = $client->getObjectByIdentifier(['identifier' => 'sitraSKI275809']);
@@ -158,8 +149,8 @@ $object = $client->getObjectByIdentifier(['identifier' => 'sitraSKI275809']);
 
 ### Search Touristic Objects
 
-- [Full request documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches)
-- [Response format documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/formats-de-reponse)
+- [Full request documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches)
+- [Response format documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/formats-de-reponse)
 
 Search queries accept a JSON formatted search object that must contain your API credentials, 
 by using this client, you can send only the search related fields in your JSON and we will add automatically the 
@@ -200,8 +191,8 @@ $client->searchObjectIdentifier(['query' => '{"searchQuery": "vélo"}']);
 
 Like normal search, you do not need to provide the API credentials to use those methods.
 
-- [Full request documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches)
-- [Response format documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/formats-de-reponse)
+- [Full request documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/format-des-recherches)
+- [Response format documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/formats-de-reponse)
 
 #### List search agenda results
 
@@ -231,7 +222,7 @@ $client->searchDetailedAgendaIdentifier(['query' => '{"searchQuery": "vélo"}'])
 
 ### Metadata
 
-[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees)
+[Full documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/metadonnees)
 
 #### List metadata
 
@@ -320,7 +311,7 @@ $client->putMetadata([
 
 Like normal search, you do not need to provide the API credentials to use those methods.
 
-[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services#referentiel)
+[Full documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/api-de-diffusion/liste-des-services#referentiel)
 
 #### Cities
 
@@ -356,7 +347,7 @@ $selections = $client->getReferenceSelection([
 
 ### Exports
 
-[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports)
+[Full documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/exports)
 
 *This feature require the PHP Zip extension and write permission on the filesystem.*
 
@@ -372,7 +363,7 @@ array(
     "statut" => "SUCCESS",
     "reinitialisation" => "false",
     "projetId" => "672",
-    "urlConfirmation" => "http://api.apidae-tourisme.com/api/v002/export/confirmation?hash=XXX",
+    "urlConfirmation" => "https://api.apidae-tourisme.com/api/v002/export/confirmation?hash=XXX",
     "ponctuel" => "true",
     "urlRecuperation" => "http://export.fm5z.com/exports/XXX.zip",
 );
@@ -449,7 +440,7 @@ $client->cleanExportFiles();
 
 ### Using the SSO
 
-[Full documentation](http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth)
+[Full documentation](https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth)
 
 You must configure your client with the SSO options ('ssoRedirectUrl', 'ssoClientId' and 'ssoSecret' at least), 
 then forward your user to the Apidae authorization URL. The user can then give your application the permission 

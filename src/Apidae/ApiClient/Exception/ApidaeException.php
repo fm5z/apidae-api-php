@@ -4,7 +4,6 @@ namespace Apidae\ApiClient\Exception;
 
 use Exception;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Utils;
 
 class ApidaeException extends \Exception
 {
@@ -20,7 +19,7 @@ class ApidaeException extends \Exception
 
         if ($this->response) {
             try {
-                $decodedJson = Utils::jsonDecode((string) $this->response->getBody(), true);
+                $decodedJson = json_decode((string) $this->response->getBody(), true);
                 if ($decodedJson && isset($decodedJson['errorType'])) {
                     $simpleMessage = $decodedJson['errorType'].' '.$decodedJson['message'];
                 }

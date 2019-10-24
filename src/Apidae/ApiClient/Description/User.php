@@ -7,7 +7,7 @@ use Apidae\ApiClient\Subscriber\AuthenticationSubscriber;
 class User
 {
     public static $operations = array(
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurprofil
+        // @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurprofil
         'getUserProfile' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/sso/utilisateur/profil',
@@ -16,7 +16,7 @@ class User
                 'scope' => AuthenticationSubscriber::SSO_SCOPE,
             ],
         ],
-        // @see http://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurautorisationobjet-touristiquemodification
+        // @see https://dev.apidae-tourisme.com/fr/documentation-technique/v2/oauth/services-associes-au-sso/v002ssoutilisateurautorisationobjet-touristiquemodification
         'getUserPermissionOnObject' => [
             'httpMethod' => 'GET',
             'uri' => '/api/v002/sso/utilisateur/autorisation/objet-touristique/modification/{id}',
