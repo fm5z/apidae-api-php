@@ -3,6 +3,7 @@
 namespace Apidae\ApiClient\Exception;
 
 use Exception;
+use GuzzleHttp\Psr7;
 use GuzzleHttp\Exception\RequestException;
 
 class ApidaeException extends \Exception
@@ -30,8 +31,8 @@ class ApidaeException extends \Exception
             $code = $this->response->getStatusCode();
         }
 
-        $responseDescription = $this->response ? (string) $this->response : 'none';
-        $requestDescription = $this->request ? (string) $this->request : 'none';
+        $responseDescription = $this->response ? Psr7\str($this->response) : 'none';
+        $requestDescription = $this->request ? Psr7\str($this->request) : 'none';
 
         $message = sprintf("%s
 
