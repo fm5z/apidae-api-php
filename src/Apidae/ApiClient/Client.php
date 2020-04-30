@@ -13,8 +13,6 @@ use GuzzleHttp\Command\ResultInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Uri;
-use Mmoreram\Extractor\Extractor;
-use Mmoreram\Extractor\Filesystem\SpecificDirectory;
 use Apidae\ApiClient\Description\Agenda;
 use Apidae\ApiClient\Description\Exports;
 use Apidae\ApiClient\Description\Metadata;
@@ -28,7 +26,6 @@ use Apidae\ApiClient\Exception\InvalidMetadataFormatException;
 use Apidae\ApiClient\Exception\ApidaeException;
 use Apidae\ApiClient\Subscriber\AuthenticationSubscriber;
 use Apidae\ApiClient\Subscriber\ObjectsGlobalConfigSubscriber;
-use Symfony\Component\Finder\Finder;
 
 /**
  * Magic operations:
@@ -161,7 +158,7 @@ class Client extends GuzzleClient
      * @param  array                            $params
      * @return \Symfony\Component\Finder\Finder
      */
-    public function getExportFiles(array $params) : Finder
+    public function getExportFiles(array $params)
     {
         $client = $this->getHttpClient();
 
@@ -174,7 +171,7 @@ class Client extends GuzzleClient
         }
 
         $temporaryDirectory = $this->getExportDirectory();
-        $exportPath         = sprintf('%s/%s', $temporaryDirectory->getDirectoryPath(), date('Y-m-d-His'));
+        $exportPath         = sprintf('%s/%s', realpath($temporaryDirectory), date('Y-m-d-His'));
         $zipFullPath        = sprintf('%s/export.zip', $exportPath);
         $exportFullPath     = sprintf('%s/export/', $exportPath);
 
@@ -191,11 +188,17 @@ class Client extends GuzzleClient
         }
 
         // Extract the ZIP file
-        $extractor = new Extractor(
-          new SpecificDirectory($exportFullPath)
-        );
-
-        return $extractor->extractFromFile($zipFullPath);
+        try {
+          $zip = new \ZipArchive;
+          if ($zip->open($zipFullPath) === TRUE) {
+            $zip->extractTo($exportFullPath);
+            $zip->close();
+          }
+        } catch (\Exception $e) {
+          $this->handleHttpError($e);
+        }
+        
+        return $exportFullPath;
     }
 
     /**
@@ -208,7 +211,7 @@ class Client extends GuzzleClient
         $exportDirectory = $this->getExportDirectory();
 
         $iterator = new \RecursiveDirectoryIterator(
-          $exportDirectory->getDirectoryPath(),
+          $exportDirectory,
           \RecursiveDirectoryIterator::SKIP_DOTS
         );
 
@@ -307,15 +310,15 @@ class Client extends GuzzleClient
     /**
      * @return SpecificDirectory
      */
-    private function getExportDirectory() : SpecificDirectory
+    private function getExportDirectory()
     {
-        if (!file_exists($this->config['exportDir'])) {
-            mkdir($this->config['exportDir']);
+      $dir = $this->config['exportDir'];
+
+        if (!file_exists($dir)) {
+            mkdir($dir);
         }
 
-        $dir = new SpecificDirectory($this->config['exportDir']);
-
-        if (!$dir) {
+        if (!file_exists($dir)) {
             throw new InvalidExportDirectoryException();
         }
 
