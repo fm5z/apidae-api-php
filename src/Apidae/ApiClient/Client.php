@@ -61,7 +61,7 @@ use Apidae\ApiClient\Subscriber\ObjectsGlobalConfigSubscriber;
 class Client extends GuzzleClient
 {
     protected $config = [
-      'baseUri'       => 'https://base.apidae-tourisme.com/',
+      'baseUri'       => 'https://api.apidae-tourisme.com/',
       'apiKey'        => null,
       'projectId'     => null,
 
