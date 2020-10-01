@@ -289,11 +289,11 @@ class Client extends GuzzleClient
             throw $e->getPrevious();
         }
         if ($e instanceof CommandClientException) {
-          throw $e;
+          throw new ApidaeException($e);
         }
 
         if ($e instanceof CommandServerException) {
-          throw $e;
+          throw new ApidaeException($e);
         }
 
         if ($e instanceof CommandException) {
