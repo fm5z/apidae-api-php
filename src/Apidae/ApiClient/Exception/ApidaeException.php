@@ -4,14 +4,13 @@ namespace Apidae\ApiClient\Exception;
 
 use Exception;
 use GuzzleHttp\Psr7;
-use GuzzleHttp\Exception\RequestException;
 
 class ApidaeException extends \Exception
 {
     protected $request;
     protected $response;
 
-    public function __construct(RequestException $e)
+    public function __construct($e)
     {
         $this->request  = $e->getRequest();
         $this->response = $e->getResponse();
