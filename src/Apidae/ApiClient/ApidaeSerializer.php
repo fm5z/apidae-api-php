@@ -17,6 +17,7 @@ use GuzzleHttp\Command\Guzzle\RequestLocation\RequestLocationInterface;
 use GuzzleHttp\Command\Guzzle\RequestLocation\XmlLocation;
 use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Psr7\Uri;
+use GuzzleHttp\UriTemplate\UriTemplate;
 use Psr\Http\Message\RequestInterface;
 use Apidae\ApiClient\Exception\MissingTokenException;
 use Apidae\ApiClient\Middleware\AuthenticationHandler;
@@ -188,8 +189,7 @@ class ApidaeSerializer
         }
 
         // Expand the URI template.
-        $uri = \GuzzleHttp\uri_template($operation->getUri(), $variables);
-
+        $uri = \GuzzleHttp\UriTemplate\UriTemplate::expand($operation->getUri(),$variables);
         return new Request(
           $operation->getHttpMethod(),
           Uri::resolve($this->description->getBaseUri(), $uri)
