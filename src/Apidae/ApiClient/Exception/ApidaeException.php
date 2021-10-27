@@ -2,15 +2,14 @@
 
 namespace Apidae\ApiClient\Exception;
 
-use Exception;
-use GuzzleHttp\Psr7;
+use GuzzleHttp\Exception\GuzzleException;
 
 class ApidaeException extends \Exception
 {
     protected $request;
     protected $response;
 
-    public function __construct($e)
+    public function __construct(GuzzleException $e)
     {
         $this->request  = $e->getRequest();
         $this->response = $e->getResponse();
@@ -30,8 +29,8 @@ class ApidaeException extends \Exception
             $code = $this->response->getStatusCode();
         }
 
-        $responseDescription = $this->response ? Psr7\str($this->response) : 'none';
-        $requestDescription = $this->request ? Psr7\str($this->request) : 'none';
+        $responseDescription = $this->response ? (string) $this->response->getBody()->getContents() : 'none';
+        $requestDescription = $this->request ? (string) $this->request->getBody()->getContents() : 'none';
 
         $message = sprintf("%s
 
