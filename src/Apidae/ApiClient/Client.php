@@ -145,7 +145,7 @@ class Client extends GuzzleClient
 
         $client = new BaseClient($config);
 
-        parent::__construct($client, $description, new ApidaeSerializer($description, [], $client,  (array) $this->config));
+        parent::__construct($client, $description, new ApidaeSerializer($description, $client, [], (array) $this->config));
 
         $stack = $this->getHandlerStack();
         $stack->before('validate_description', new ObjectsGlobalConfigSubscriber($description, (array) $this->config), 'objects_global_config');
