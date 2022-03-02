@@ -48,7 +48,8 @@ class ApidaeSerializer
      */
     public function __construct(
       DescriptionInterface $description,
-      array $requestLocations = [], Client $client,
+      Client $client,
+      array $requestLocations = [], 
       array $config = []
     ) {
         static $defaultRequestLocations;
