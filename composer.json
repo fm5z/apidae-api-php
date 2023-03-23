@@ -17,7 +17,8 @@
     "autoload": {
         "psr-4": {
             "Apidae\\ApiClient\\": "src/Apidae/ApiClient",
-            "Apidae\\Tests\\": "tests/"
+            "Apidae\\Tests\\": "tests/",
+            "Regiondo\\ApiClient\\": "src/Regiondo/ApiClient"
         }
     },
     "minimum-stability": "dev",
