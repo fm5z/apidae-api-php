@@ -84,7 +84,7 @@ class Client
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_setopt($ch, CURLOPT_URL, $this->_baseUrl . $this->_basePath . '?' . http_build_query($data));
-        curl_setopt($ch, CURLOPT_HEADER, true);
+        curl_setopt($ch, CURLOPT_HEADER, false);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLINFO_HEADER_OUT, true);
@@ -93,14 +93,14 @@ class Client
         if ($result === false) {
             echo "Curl Error: " . curl_error($ch);
         } else {
-            echo PHP_EOL;
-            echo "Request: " . PHP_EOL;
-            echo curl_getinfo($ch, CURLINFO_HEADER_OUT);
-            echo PHP_EOL;
+            // echo PHP_EOL;
+            // echo "Request: " . PHP_EOL;
+            // echo curl_getinfo($ch, CURLINFO_HEADER_OUT);
+            // echo PHP_EOL;
 
-            echo "Response:" . PHP_EOL;
+            // echo "Response:" . PHP_EOL;
             echo $result;
-            echo PHP_EOL;
+            // echo PHP_EOL;
         }
 
         curl_close($ch);
