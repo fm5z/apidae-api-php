@@ -178,7 +178,7 @@ class Client extends GuzzleClient
         mkdir($exportPath);
         mkdir($exportFullPath);
 
-        $resource = fopen($zipFullPath, 'w');
+        $resource = fopen($zipFullPath, 'w+');
 
         // Download the ZIP file in temp directory
         try {
